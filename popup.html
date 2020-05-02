@@ -1,0 +1,397 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Deribit Scaled Orders 1.01</title>
+	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="popup.css?b=1" type="text/css">
+	<script type="text/javascript" src="popup.js"></script>
+</head>
+
+<body class="dark-theme sidebar-left ticker-side">
+	<div class="preset left">
+		<p style="margin: 0; padding: 0;">
+			<span class="small-label">Presets</span><span id="delete_presets" class="deleteBtn small-label right">X</span>
+			<div id="preset_list"></div>
+		</p>
+	</div>
+	<div class="modal-content">
+		<h5 style="color: #ffffff;">
+			<img src="images/logo_48.png" style="vertical-align:bottom;height:26px;"> Deribit Scaled Order Form
+			<a href="#" style="color: #36AD9A; float: right; font-size: 17px;" id="settings">
+				<span id="mainLabel"><i class="fa fa-cog" aria-hidden="true"></i> Settings</span>
+				<span id="settingsLabel"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</span>
+			</a>
+		</h5>
+		<div id="main_panel">
+			<form accept-charset="UTF-8" action="#" id="main-panel-form" method="post" onsubmit="" novalidate="novalidate">
+				<div style="display: none">
+					<input name="utf8" value="✓" type="hidden"><input name="authenticity_token"
+						value="tXkL/UxMYMtsKUz9RkWInlBxscqJJuil+GwEs1ohd9M=" type="hidden">
+				</div>
+
+				<input id="scaled-custom-dist-values" name="custom-dist" value="" type="hidden">
+
+				<div class="field-and-submit-wrap">
+
+					<div class="border" style="padding: 12px 6px; margin-top: 16px; overflow: hidden;">
+
+						<div class="row" id="scaled-warning"
+							style="margin-top: 0px; overflow: hidden; margin-bottom: 8px; display: none;">
+							<div class="col s12">
+								<p class="notice warning" style="padding: 5px 10px;"></p>
+							</div>
+						</div>
+
+						<div class="row" style="margin-top: 0px; overflow: hidden; margin-bottom: 8px;">
+
+							<div class="col m4">
+								<p style="margin: 0; padding: 0;">
+									<span class="small-label">Instrument</span>
+								</p>
+								<div class="nice-select-wrap" style="margin-top: 0;">
+									<select id="instruments" name="pair" class="browser-default">
+										<option value="BTCUSD" selected="">BTC/USD</option>
+										<option value="LTCUSD">LTC/USD</option>
+										<option value="LTCBTC">LTC/BTC</option>
+										<option value="ETHUSD">ETH/USD</option>
+										<option value="ETHBTC">ETH/BTC</option>
+										<option value="ETCBTC">ETC/BTC</option>
+										<option value="ETCUSD">ETC/USD</option>
+										<option value="RRTUSD">RRT/USD</option>
+										<option value="RRTBTC">RRT/BTC</option>
+										<option value="ZECUSD">ZEC/USD</option>
+										<option value="ZECBTC">ZEC/BTC</option>
+										<option value="XMRUSD">XMR/USD</option>
+										<option value="XMRBTC">XMR/BTC</option>
+										<option value="DSHUSD">DASH/USD</option>
+										<option value="DSHBTC">DASH/BTC</option>
+										<option value="BCCBTC">BCC/BTC</option>
+										<option value="BCUBTC">BCU/BTC</option>
+										<option value="BCCUSD">BCC/USD</option>
+										<option value="BCUUSD">BCU/USD</option>
+										<option value="BTCEUR">BTC/EUR</option>
+										<option value="XRPUSD">XRP/USD</option>
+										<option value="XRPBTC">XRP/BTC</option>
+										<option value="IOTUSD">IOTA/USD</option>
+										<option value="IOTBTC">IOTA/BTC</option>
+										<option value="IOTETH">IOTA/ETH</option>
+										<option value="EOSUSD">EOS/USD</option>
+										<option value="EOSBTC">EOS/BTC</option>
+										<option value="EOSETH">EOS/ETH</option>
+										<option value="SANUSD">SAN/USD</option>
+										<option value="SANBTC">SAN/BTC</option>
+										<option value="SANETH">SAN/ETH</option>
+										<option value="OMGUSD">OMG/USD</option>
+										<option value="OMGBTC">OMG/BTC</option>
+										<option value="OMGETH">OMG/ETH</option>
+										<option value="BCHUSD">BCH/USD</option>
+										<option value="BCHBTC">BCH/BTC</option>
+										<option value="BCHETH">BCH/ETH</option>
+										<option value="NEOUSD">NEO/USD</option>
+										<option value="NEOBTC">NEO/BTC</option>
+										<option value="NEOETH">NEO/ETH</option>
+										<option value="ETPUSD">ETP/USD</option>
+										<option value="ETPBTC">ETP/BTC</option>
+										<option value="ETPETH">ETP/ETH</option>
+										<option value="QTMUSD">QTUM/USD</option>
+										<option value="QTMBTC">QTUM/BTC</option>
+										<option value="QTMETH">QTUM/ETH</option>
+										<option value="BT1USD">BT1/USD</option>
+										<option value="BT2USD">BT2/USD</option>
+										<option value="BT1BTC">BT1/BTC</option>
+										<option value="BT2BTC">BT2/BTC</option>
+										<option value="AVTUSD">AVT/USD</option>
+										<option value="AVTBTC">AVT/BTC</option>
+										<option value="AVTETH">AVT/ETH</option>
+										<option value="EDOUSD">EDO/USD</option>
+										<option value="EDOBTC">EDO/BTC</option>
+										<option value="EDOETH">EDO/ETH</option>
+										<option value="BTGUSD">BTG/USD</option>
+										<option value="BTGBTC">BTG/BTC</option>
+										<option value="DATUSD">DATA/USD</option>
+										<option value="DATBTC">DATA/BTC</option>
+										<option value="DATETH">DATA/ETH</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col m3" style="padding-left:0;">
+								<div class="has_error-container" data_error-container="#scaled-leverage-validate">
+									<table class="compact o-modal-table" style="margin-top: 12px;">
+										<tbody>
+											<tr>
+												<td><input checked="checked" id="contract_quantity" name="leverage" value="exchange"
+														type="radio"> <label for="contract_quantity">Contract&nbsp;Qty&nbsp;($10)&nbsp;</label></td>
+											</tr>
+											<tr>
+												<td><input id="btc_quantity" name="leverage" value="margin" type="radio"> <label
+														for="btc_quantity">BTC&nbsp;Quantity</label></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="scaled-leverage-validate"></div>
+							</div>
+
+							<div class="col m2" style="padding-left:24px;padding-right:0;">
+								<div class="has_error-container" data_error-container="#scaked-side-validate">
+									<table class="compact o-modal-table" style="margin-top: 12px;">
+										<tbody>
+											<tr>
+												<td><input id="scaled_side_bid" name="scaled_side" value="bid" type="radio"> <label
+														for="scaled_side_bid"> Buy </label></td>
+											</tr>
+											<tr>
+												<td><input id="scaled_side_ask" name="scaled_side" value="ask" type="radio"> <label
+														for="scaled_side_ask"> Sell </label></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="scaled-side-validate"><label id="scaled_side_error" class="hide" for="scaled_side">This field
+										is required.</label></div>
+							</div>
+							<div class="col m3" style="padding:0;">
+								<table class="compact o-modal-table" style="margin-top: 12px;">
+									<tbody>
+										<tr>
+											<td><a id="current_price_btn" class="btn-flat" style="padding:0;font-size:15px;">Get current
+													price</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+
+							<!--col-->
+
+						</div>
+						<!--row-->
+
+						<div class="row no-margin-bottom">
+							<div class="col m3">
+								<p style="margin: 0; padding: 0; white-space: nowrap;">
+									<span class="small-label" id="lblQuantity">Quantity</span> <a
+										style="position: relative; top: -1px; margin-left: 2px; font-weight: bold;"
+										class="btn-flat btn-light-grey btn-tiny tooltip">?<span class="tooltiptext">The total amount to
+											split over multiple orders.</span></a>
+								</p>
+								<div class="input-field" style="margin-top: 3px;">
+									<input autocomplete="off" data-lpignore="true" id="quantity" name="quantity" tabindex="1" value=""
+										type="text">
+									<label id="quantity_error" class="hide" for="quantity">This field is required.</label>
+								</div>
+							</div>
+
+							<div class="col m3">
+								<p style="margin: 0; padding: 0;">
+									<span class="small-label">Order Count</span> <a
+										style="position: relative; top: -1px; margin-left: 2px; font-weight: bold;"
+										class="btn-flat btn-light-grey btn-tiny tooltip">?<span class="tooltiptext">The number of orders to
+											split the amount into.</span></a>
+								</p>
+								<div class="input-field" style="margin-top: 3px;">
+									<input autocomplete="off" data-allow-more="false" data-lpignore="true" id="order_count"
+										name="order_count" tabindex="1" value="" aria-required="true" type="text">
+									<label id="order_count_error" class="hide" for="order_count" style="display: inline-block;">This field
+										is required.</label>
+								</div>
+							</div>
+
+							<div class="col m3">
+								<p style="margin: 0; padding: 0; white-space: nowrap;">
+									<span class="small-label" id="lblPriceLower">Price Lower</span> <a
+										style="position: relative; top: -1px; margin-left: 2px; font-weight: bold;"
+										class="btn-flat btn-light-grey btn-tiny tooltip">?<span class="tooltiptext">The lower price to start
+											the range of orders.</span></a>
+								</p>
+								<div class="input-field" style="margin-top: 3px;">
+									<input autocomplete="off" data-lpignore="true" id="range_start" name="range_start" tabindex="1"
+										value="" type="text">
+									<label id="range_start_error" class="hide" for="range_start">This field is required.</label>
+								</div>
+							</div>
+
+							<div class="col m3">
+								<p style="margin: 0; padding: 0; white-space: nowrap;">
+									<span class="small-label" id="lblPriceUpper">Price Upper</span> <a
+										style="position: relative; top: -1px; margin-left: 2px; font-weight: bold;"
+										class="btn-flat btn-light-grey btn-tiny tooltip">?<span class="tooltiptext">The upper price to start
+											the range of orders.</span></a>
+								</p>
+								<div class="input-field" style="margin-top: 3px;">
+									<input autocomplete="off" data-lpignore="true" id="range_end" name="range_end" tabindex="1" value=""
+										type="text">
+									<label id="range_end_error" class="hide" for="range_end">This field is required.</label>
+								</div>
+							</div>
+						</div>
+						<!--row-->
+
+						<div class="row no-margin-bottom">
+
+							<div class="col m6">
+								<p class="smaller-checkbox" style="margin: 2px;">
+									<input class="filled-in" id="hidden" name="hidden" value="1" type="checkbox"> <label
+										for="hidden">Hidden</label>
+								</p>
+
+								<p class="smaller-checkbox" style="margin: 2px;">
+									<input class="filled-in" id="noise" name="noise" value="1" type="checkbox"> <label for="noise"> Amount
+										variance (&plusmn;%) <input autocomplete="off" data-lpignore="true" id="noise_amount"
+											name="noise_amount" tabindex="1" data-default-value="5.00" value="5.00"
+											style="margin: 0; padding: 0; width: 45px; height: 19px; font-size: 13px;" type="text"> <a
+											style="position: relative; top: -1px; margin-left: 2px; font-weight: bold;"
+											class="btn-flat btn-light-grey btn-tiny tooltip">?<span class="tooltiptext">Add variation into the
+												amount of each order.<br>The total amount remains the same.</span></a>
+									</label>
+								</p>
+
+								<p class="smaller-checkbox" style="margin: 2px;">
+									<input class="filled-in" id="pnoise" name="pnoise" value="1" type="checkbox"> <label for="pnoise">
+										Price variance (&plusmn;%) <input autocomplete="off" data-lpignore="true" id="pnoise_amount"
+											name="pnoise_amount" tabindex="1" data-default-value="0.10" value="0.10"
+											style="margin: 0; padding: 0; width: 45px; height: 19px; font-size: 13px;" type="text"> <a
+											style="position: relative; top: -1px; margin-left: 2px; font-weight: bold;"
+											class="btn-flat btn-light-grey btn-tiny tooltip">?<span class="tooltiptext">Add variation into the
+												price of each order.</span></a>
+									</label>
+								</p>
+							</div>
+
+							<div class="col m6">
+								<div class="has_error-container" data_error-container="#scaled-dist-validate">
+									<p style="margin: 0; padding: 0;">
+										<span class="small-label">Distribution</span> <a
+											style="position: relative; top: -1px; margin-left: 2px; font-weight: bold;"
+											class="btn-flat btn-light-grey btn-tiny tooltip">?<span class="tooltiptext">Controls the way the
+												amount of your orders is distributed between each of the orders.</span></a>
+									</p>
+									<table class="compact scaled-dist-options-table" style="width: 190px;">
+										<tbody>
+											<tr>
+												<td><input checked="checked" id="shape_flat" name="shape" value="flat" type="radio"> <label
+														for="shape_flat"> Flat </label></td>
+												<td><input id="shape_asc" name="shape" value="asc" type="radio"> <label for="shape_asc"> <i
+															class="fa fa-sort-amount-asc fa-rotate-270"></i>
+													</label></td>
+												<td><input id="shape_desc" name="shape" value="desc" type="radio"> <label for="shape_desc"> <i
+															class="fa fa-sort-amount-desc fa-rotate-270"></i>
+													</label></td>
+												<!-- <td><input id="shape_custom" name="shape" value="custom" type="radio"> <label for="shape_custom"> Custom </label></td> -->
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="scaled-dist-validate"></div>
+
+								<!-- <div id="scaled-chart-container" style="height: 70px" data-highcharts-chart="1">
+									<div id="highcharts-dpx3173-4" style="position: relative; overflow: hidden; width: 120px; height: 65px; text-align: left; line-height: normal; z-index: 0; left: 0.383301px; top: 0.0333405px;" class="highcharts-container ">
+										<svg version="1.1" class="highcharts-root" style="font-family: &amp; amp; quot; Lucida Grande&amp;amp; quot; , &amp; amp; quot; Lucida Sans Unicode&amp;amp; quot; , Arial , Helvetica, sans-serif; font-size: 12px;" xmlns="http://www.w3.org/2000/svg" width="120" height="65" viewBox="0 0 120 65">
+												<desc>Created with Highcharts 5.0.12</desc>
+												<defs>
+												<clipPath id="highcharts-dpx3173-5">
+												<rect x="0" y="0" width="105" height="51" fill="none"></rect></clipPath></defs>
+												<rect fill="rgba(255, 255, 255, 0)" class="highcharts-background" x="0" y="0" width="120" height="65" rx="0" ry="0"></rect>
+												<rect fill="none" class="highcharts-plot-background" x="10" y="10" width="105" height="51"></rect>
+												<g class="highcharts-grid highcharts-xaxis-grid ">
+												<path fill="none" class="highcharts-grid-line" d="M 10.5 10 L 10.5 61" opacity="1"></path></g>
+												<g class="highcharts-grid highcharts-yaxis-grid ">
+												<path fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" class="highcharts-grid-line" d="M 10 61.5 L 115 61.5" opacity="1"></path>
+												<path fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" class="highcharts-grid-line" d="M 10 9.5 L 115 9.5" opacity="1"></path></g>
+												<rect fill="none" class="highcharts-plot-border" stroke="rgba(140, 142, 142, 0.2)" stroke-width="1" x="9.5" y="9.5" width="106" height="52"></rect>
+												<g class="highcharts-axis highcharts-xaxis ">
+												<path fill="none" class="highcharts-tick" stroke="rgba(255, 255, 255, 0)" stroke-width="1" d="M 10.5 61 L 10.5 71" opacity="1"></path>
+												<path fill="none" class="highcharts-axis-line" stroke="#ccd6eb" stroke-width="1" d="M 10 61.5 L 115 61.5"></path></g>
+												<g class="highcharts-axis highcharts-yaxis ">
+												<path fill="none" class="highcharts-axis-line" d="M 10 10 L 10 61"></path></g>
+												<g class="highcharts-series-group">
+												<g class="highcharts-series highcharts-series-0 highcharts-line-series highcharts-color-0 " transform="translate(10,10) scale(1 1)" clip-path="url(#highcharts-dpx3173-5)">
+												<path fill="none" d="M 1.0294117647059 40.8 L 26.764705882353 40.8 L 52.5 40.8 L 78.235294117647 40.8 L 103.97058823529 40.8" class="highcharts-graph" stroke="#36AD9A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+												<path fill="none" d="M -8.9705882352941 40.8 L 1.0294117647059 40.8 L 26.764705882353 40.8 L 52.5 40.8 L 78.235294117647 40.8 L 103.97058823529 40.8 L 113.97058823529 40.8" stroke-linejoin="round" visibility="visible" stroke="rgba(192,192,192,0.0001)" stroke-width="22" class="highcharts-tracker" style="cursor:ns-resize;"></path></g>
+												<g class="highcharts-markers highcharts-series-0 highcharts-line-series highcharts-color-0 highcharts-tracker " transform="translate(10,10) scale(1 1)" style="cursor:ns-resize;">
+												<path fill="#36AD9A" d="M 5 41 A 4 4 0 1 1 4.999998000000167 40.99600000066666 Z" class="highcharts-point highcharts-color-0"></path>
+												<path fill="#36AD9A" d="M 30 41 A 4 4 0 1 1 29.99999800000017 40.99600000066666 Z" class="highcharts-point highcharts-color-0"></path>
+												<path fill="#36AD9A" d="M 56 41 A 4 4 0 1 1 55.99999800000017 40.99600000066666 Z" class="highcharts-point highcharts-color-0"></path>
+												<path fill="#36AD9A" d="M 82 41 A 4 4 0 1 1 81.99999800000016 40.99600000066666 Z" class="highcharts-point highcharts-color-0"></path>
+												<path fill="#36AD9A" d="M 107 41 A 4 4 0 1 1 106.99999800000016 40.99600000066666 Z" class="highcharts-point highcharts-color-0"></path></g></g>
+												<g class="highcharts-axis-labels highcharts-xaxis-labels "></g>
+												<g class="highcharts-axis-labels highcharts-yaxis-labels "></g></svg>
+									</div>
+								</div> -->
+							</div>
+
+						</div>
+						<!--row-->
+
+						<div class="row no-margin-bottom">
+							<div class="col s12" style="margin-top: 12px;">
+								<input class="left col s3" style="margin-top:4px;" type="text" autocomplete="off" id="preset_name"
+									name="preset_name" value="">
+								<a id="save_preset_btn" style="padding-left:10px;" class="left btn-flat">Save preset</a>
+								<button class="right btn"
+									data-disable-with="<div class='hide-text'>Submit</div><i class='fa fa-circle-o-notch fa-spin'>"
+									id="submit_new_scaled" name="button" type="submit">Submit</button>
+								<a id="scaled_preview_btn" class="right btn-flat">Preview</a>
+							</div>
+						</div>
+						<!--row-->
+
+					</div>
+
+				</div>
+
+			</form>
+			<!--form-->
+
+			<div id="scaled_preview_wrap">
+				<table class="compact" style="width:100%;height:100%;">
+					<thead style="display:block;">
+						<tr>
+							<th class="buySell"></th>
+							<th class="col-info col-info1">Pair</th>
+							<th class="col-info col-info2">Order Type</th>
+							<th class="col-num">Amount</th>
+							<th class="col-currency">Price</th>
+						</tr>
+					</thead>
+					<tbody id="rows">
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="settings_panel">
+			<form accept-charset="UTF-8" action="#" id="settings-panel-form" method="post" onsubmit=""
+				novalidate="novalidate">
+				<div class="field-and-submit-wrap">
+					<div class="border" style="padding: 12px 6px; margin-top: 16px; ">
+						<div class="row no-margin-bottom">
+							<div class="col m4">
+								<div class="has_error-container" data_error-container="#scaled-leverage-validate">
+									<table class="compact o-modal-table">
+										<tbody>
+											<tr>
+												<td><input id="useLive" name="rootUrl" value="https://www.deribit.com" type="radio"> <label
+														for="useLive">Use&nbsp;Mainnet</label></td>
+											</tr>
+											<tr>
+												<td><input id="useTestnet" name="rootUrl" value="https://test.deribit.com" type="radio"> <label
+														for="useTestnet">Use&nbsp;Testnet</label></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!--row-->
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--scaled_preview_wrap-->
+
+	</div>
+</body>
+
+</html>
