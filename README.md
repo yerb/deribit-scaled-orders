@@ -1,2 +1,2 @@
 # deribit-scaled-orders
-Tool to make scaled orders on Deribit
+Chrome extension for making scaled orders on Deribit
