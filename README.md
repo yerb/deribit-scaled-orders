@@ -1,5 +1,6 @@
 # deribit-scaled-orders
 Chrome / Firefox extension for making scaled orders on Deribit
+Original author https://twitter.com/cipher_science
 
 Note:
 
