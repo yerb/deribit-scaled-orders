@@ -323,7 +323,7 @@ function getCurrentPrice() {
   getPriceIndex(function (result) {
     if (result !== null) {
       //update range prices
-      range_end.value = range_start.value = result.result.btc;
+      range_end.value = range_start.value = result.result.index_price;
       console.log('result:' + JSON.stringify(result));
     }
   });
@@ -969,14 +969,16 @@ function getInstruments(callback) {
 }
 
 function getPriceIndex(callback) {
-  //add price index from Derebit api (only Futures)
-  var url = rootUrl + '/api/v1/public/index';
+  //add USD price index from Derebit api (only Futures) based on selected instrument
+  var index_name = instruments.value.split("-")[0].toLowerCase()+"_usd"
+  var url = rootUrl + '/api/v2/public/get_index_price?index_name=' + index_name;
+  //console.log(url);
   var req = new XMLHttpRequest();
 
   req.onreadystatechange = function (e) {
     if (req.readyState == 4) {
       if (req.status == 200) {
-        //				console.log(req.responseText);
+        //console.log(req.responseText);
         callback(JSON.parse(req.responseText));
       } else {
         console.log(req.responseText);
