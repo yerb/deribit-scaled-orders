@@ -637,21 +637,30 @@ function preview(e) {
         console.log('tabs[0].id: ' + tabs[0].id);
         console.log('tabs[0].url: ' + tabs[0].url);
         console.log('orders:' + JSON.stringify(orders));
-        chrome.tabs.sendMessage(
-          tabs[0].id,
-          {
-            orders: orders,
-            rootUrl: rootUrl,
-            side: settings.side.toLowerCase(),
-          },
-          function (response) {
-            if (response) {
-              console.log(response.farewell);
-            } else {
-              console.log('no response');
-            }
+        
+        function* ordersGen(orders){
+          for (const order of orders) {
+            yield order;
           }
-        );
+        }
+        
+        const gen = ordersGen(orders);
+        const start = setInterval(() => {
+          var next = gen.next();             
+          if(next.done){                     
+              clearInterval(start);
+          } else {
+            console.log(next.value);
+            chrome.tabs.sendMessage(
+              tabs[0].id,
+              {
+                orders: [next.value],
+                rootUrl: rootUrl,
+                side: settings.side.toLowerCase(),
+              });
+          }
+        }, 200)
+        
       }
     );
 
@@ -991,5 +1000,7 @@ function getPriceIndex(callback) {
   req.setRequestHeader('Accept', 'application/json');
   req.send(null);
 }
+
+
 
 window.onload = init;
