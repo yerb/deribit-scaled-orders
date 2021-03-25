@@ -940,9 +940,10 @@ function initInstruments() {
       if (result.success) {
         instrumentsData = result.result;
         //only show futures
-        instrumentsData = instrumentsData.filter((obj) => {
-          return obj.kind === 'future';
-        });
+        instrumentsData = instrumentsData.filter((obj) => obj.kind === 'future');
+        // sort by currency / expiration
+        instrumentsData = instrumentsData.sort((a,b) => (a.baseCurrency+a.expiration > b.baseCurrency+b.expiration) ? 1 :((b.baseCurrency+b.expiration > a.baseCurrency+a.expiration)?-1:0))
+
         for (var i = 0; i < instrumentsData.length; i++) {
           var instrument = instrumentsData[i];
           var option = document.createElement('option');
