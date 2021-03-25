@@ -872,9 +872,9 @@ function validateOrderCount() {
       'Please enter a value greater than or equal to 2.';
     order_count_error.className = 'error';
     return false;
-  } else if (n > 50) {
+  } else if (n > 100) {
     order_count_error.textContent =
-      'Please enter a value less than or equal to 50.';
+      'Please enter a value less than or equal to 100.';
     order_count_error.className = 'error';
     return false;
   } else {
