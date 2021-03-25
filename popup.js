@@ -1,7 +1,7 @@
 //global vars
 var instruments,
   contract_quantity,
-  btc_quantity,
+  crypto_quantity,
   scaled_side_bid,
   scaled_side_ask,
   scaled_side_error;
@@ -100,7 +100,7 @@ function init() {
   instruments = document.getElementById('instruments');
 
   contract_quantity = document.getElementById('contract_quantity');
-  btc_quantity = document.getElementById('btc_quantity');
+  crypto_quantity = document.getElementById('crypto_quantity');
 
   scaled_side_bid = document.getElementById('scaled_side_bid'); //buy
   scaled_side_bid.addEventListener('click', function () {
@@ -216,7 +216,7 @@ function showPreset() {
   scaled_side_bid.checked = preset.scaled_side_bid;
   scaled_side_ask.checked = preset.scaled_side_ask;
   contract_quantity.checked = preset.contract_quantity;
-  btc_quantity.checked = preset.btc_quantity;
+  crypto_quantity.checked = preset.crypto_quantity;
   quantity.value = preset.quantity;
   order_count.value = preset.order_count;
   range_start.value = preset.range_start;
@@ -257,7 +257,7 @@ function savePreset() {
     scaled_side_bid: scaled_side_bid.checked,
     scaled_side_ask: scaled_side_ask.checked,
     contract_quantity: contract_quantity.checked,
-    btc_quantity: btc_quantity.checked,
+    crypto_quantity: crypto_quantity.checked,
     quantity: quantity.value.trim(),
     order_count: order_count.value.trim(),
     range_start: range_start.value.trim(),
@@ -495,8 +495,9 @@ function preview(e) {
 
   //use integer settings if contract based
   if (settings.type == 'Contract') {
+    contracSize = selectedContractSize();
     amounts = amounts.map(function (e) {
-      return Math.ceil((e + 1) / 10) * 10;
+      return Math.ceil((e + 1) / contracSize) * contracSize;
     });
   }
 
@@ -609,6 +610,7 @@ function preview(e) {
     //submit order
     var orders = [];
 
+    contractSize = selectedContractSize();
     //create all orders
     for (var j = settings.orderCount - 1; j >= 0; j--) {
       //create basic order
@@ -622,8 +624,8 @@ function preview(e) {
       if (settings.type == 'Contract') {
         order.quantity = '' + amounts[j];
       } else {
-        //calculate contracts that match this amount of BTC
-        order.quantity = '' + Math.floor((amounts[j] * prices[j]) / 10.0);
+        //calculate contracts that match this amount of crypto
+        order.quantity = '' + Math.floor((amounts[j] * prices[j]) / contractSize);
       }
       //add to list of orders
       orders.push(order);
@@ -813,9 +815,9 @@ function validateAll() {
   } else if (shape_custom.checked) {
     settings.shape = 'custom';
   }
-  //contract_quantity,btc_quantity
-  if (btc_quantity.checked) {
-    settings.type = 'BTC';
+  //contract_quantity,crypto_quantity
+  if (crypto_quantity.checked) {
+    settings.type = 'Crypto';
   } else if (contract_quantity.checked) {
     settings.type = 'Contract';
     //check to be sure order count<=quantity
@@ -942,7 +944,7 @@ function initInstruments() {
         //only show futures
         instrumentsData = instrumentsData.filter((obj) => obj.kind === 'future');
         // sort by currency / expiration
-        instrumentsData = instrumentsData.sort((a,b) => (a.baseCurrency+a.expiration > b.baseCurrency+b.expiration) ? 1 :((b.baseCurrency+b.expiration > a.baseCurrency+a.expiration)?-1:0))
+        instrumentsData = instrumentsData.sort((a,b) => (a.baseCurrency+a.expiration > b.baseCurrency+b.expiration)?1:((b.baseCurrency+b.expiration > a.baseCurrency+a.expiration)?-1:0))
 
         for (var i = 0; i < instrumentsData.length; i++) {
           var instrument = instrumentsData[i];
@@ -1002,6 +1004,8 @@ function getPriceIndex(callback) {
   req.send(null);
 }
 
-
+function selectedContractSize(){
+  return parseFloat(instrumentsData.filter(x => x.instrumentName == instruments.value)[0].contractSize);
+}
 
 window.onload = init;
